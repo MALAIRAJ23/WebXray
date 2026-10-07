@@ -58,7 +58,7 @@ test-results/
 *.zip
 
 # Local reports / generated files
-reports/
+/reports/
 screenshots/generated/
 
 # Misc
