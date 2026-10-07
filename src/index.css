@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --wl-bg: #0e1116;
+  --wl-surface: #151a21;
+  --wl-raised: #1b212a;
+  --wl-border: #262d38;
+  --wl-text: #e6e9ee;
+  --wl-muted: #8b94a3;
+  --wl-accent: #4f8cff;
+  --wl-accent-hover: #3b7cf5;
+  --wl-accent-muted: rgba(79, 140, 255, 0.12);
+
+  /* Semantic severity & score states */
+  --wl-critical: #f85149;
+  --wl-critical-bg: rgba(248, 81, 73, 0.12);
+  --wl-critical-border: rgba(248, 81, 73, 0.35);
+
+  --wl-high: #f85149;
+  --wl-high-bg: rgba(248, 81, 73, 0.12);
+  --wl-high-border: rgba(248, 81, 73, 0.35);
+
+  --wl-medium: #d29922;
+  --wl-medium-bg: rgba(210, 153, 34, 0.12);
+  --wl-medium-border: rgba(210, 153, 34, 0.35);
+
+  --wl-low: #7d8590;
+  --wl-low-bg: rgba(125, 133, 144, 0.12);
+  --wl-low-border: rgba(125, 133, 144, 0.35);
+
+  --wl-passed: #3fb950;
+  --wl-passed-bg: rgba(63, 185, 80, 0.12);
+  --wl-passed-border: rgba(63, 185, 80, 0.35);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --wl-bg: #ffffff;
+    --wl-surface: #f6f8fa;
+    --wl-raised: #eaeef2;
+    --wl-border: #d0d7de;
+    --wl-text: #1f2328;
+    --wl-muted: #656d76;
+    --wl-accent: #0969da;
+    --wl-accent-hover: #085cc0;
+    --wl-accent-muted: rgba(9, 105, 218, 0.1);
+
+    --wl-critical: #cf222e;
+    --wl-critical-bg: rgba(207, 34, 46, 0.08);
+    --wl-critical-border: rgba(207, 34, 46, 0.3);
+
+    --wl-high: #cf222e;
+    --wl-high-bg: rgba(207, 34, 46, 0.08);
+    --wl-high-border: rgba(207, 34, 46, 0.3);
+
+    --wl-medium: #9a6700;
+    --wl-medium-bg: rgba(154, 103, 0, 0.08);
+    --wl-medium-border: rgba(154, 103, 0, 0.3);
+
+    --wl-low: #656d76;
+    --wl-low-bg: rgba(101, 109, 118, 0.08);
+    --wl-low-border: rgba(101, 109, 118, 0.3);
+
+    --wl-passed: #1a7f37;
+    --wl-passed-bg: rgba(26, 127, 55, 0.08);
+    --wl-passed-border: rgba(26, 127, 55, 0.3);
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--wl-bg);
+    color: var(--wl-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--wl-accent);
+    outline-offset: 1px;
+  }
+}
+
+/* Developer tool compact scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--wl-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--wl-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--wl-muted);
+}
+
+/* Accessibility: respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

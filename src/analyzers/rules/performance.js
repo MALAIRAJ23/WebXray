@@ -1,0 +1,103 @@
+/**
+ * WebXray - Performance Rule Catalog
+ * Single source of truth for all performance audits and score weighting.
+ * Category weights sum to 100.
+ */
+
+export const PERFORMANCE_RULES = [
+  {
+    id: 'perf-lcp',
+    category: 'performance',
+    title: 'Largest Contentful Paint (LCP) is within 2.5 seconds',
+    description: 'Measures perceived loading speed by recording when the main content element has rendered.',
+    weight: 20,
+    severityOnFail: 'high',
+    whyItMatters: 'LCP measures when the primary content element has rendered. Slow LCP causes users to perceive the site as unresponsive and increases bounce rates.',
+    recommendation: 'Optimize the LCP element (hero image, heading, or banner). Preload it with <link rel="preload"> and eliminate render-blocking CSS/JS.',
+    threshold: { good: 2500, needsImprovement: 4000, unit: 'ms' },
+    source: 'standard',
+    reference: 'Web Vitals LCP (Google)',
+  },
+  {
+    id: 'perf-cls',
+    category: 'performance',
+    title: 'Cumulative Layout Shift (CLS) is 0.1 or lower',
+    description: 'Measures visual stability by quantifying unexpected layout shifts during page loading.',
+    weight: 15,
+    severityOnFail: 'high',
+    whyItMatters: 'Unexpected layout movements cause jarring visual jumps, leading to frustrating misclicks and disorientation.',
+    recommendation: 'Set explicit width and height dimensions on images, videos, and iframe containers, and reserve space for dynamic ads or banners.',
+    threshold: { good: 0.1, needsImprovement: 0.25 },
+    source: 'standard',
+    reference: 'Web Vitals CLS (Google)',
+  },
+  {
+    id: 'perf-ttfb',
+    category: 'performance',
+    title: 'Time to First Byte (TTFB) is 800 ms or faster',
+    description: 'Measures server responsiveness before the browser receives the first byte of HTML.',
+    weight: 15,
+    severityOnFail: 'high',
+    whyItMatters: 'Slow TTFB delays every subsequent resource request, bottlenecking overall page load.',
+    recommendation: 'Implement CDN edge caching, optimize server-side database queries, and enable HTTP/2 or HTTP/3.',
+    threshold: { good: 800, needsImprovement: 1000, unit: 'ms' },
+    source: 'heuristic',
+    reference: 'Google Web Dev Performance Guidelines',
+  },
+  {
+    id: 'perf-images',
+    category: 'performance',
+    title: 'Image assets are compressed and under 500 KB',
+    description: 'Audits image payloads to identify oversized files that deplete network bandwidth.',
+    weight: 15,
+    severityOnFail: 'critical',
+    whyItMatters: 'Huge image payloads severely deplete mobile data, block bandwidth, and cause severe LCP delays.',
+    recommendation: 'Convert images to modern formats (WebP/AVIF), compress quality to 80%, and implement responsive srcset widths.',
+    threshold: { max: 500000, criticalMax: 1000000, unit: 'bytes' },
+    source: 'heuristic',
+    reference: 'HTTP Archive Media Budgets',
+  },
+  {
+    id: 'perf-js-count',
+    category: 'performance',
+    title: 'JavaScript request count is 15 files or fewer',
+    description: 'Monitors the number of individual JavaScript requests to prevent network queue bottlenecks.',
+    weight: 15,
+    severityOnFail: 'high',
+    whyItMatters: 'Too many scripts create excessive HTTP handshakes, flood the browser network queue, and increase main thread script evaluation time.',
+    recommendation: 'Bundle script modules with Vite or Webpack, implement code splitting, and remove redundant third-party libraries.',
+    threshold: { max: 15, criticalMax: 25 },
+    source: 'heuristic',
+    reference: 'Modern Web Asset Bundling Best Practices',
+  },
+  {
+    id: 'perf-total-weight',
+    category: 'performance',
+    title: 'Total page transfer weight is under 3 MB',
+    description: 'Checks aggregate network transfer size across all requested page assets.',
+    weight: 10,
+    severityOnFail: 'high',
+    whyItMatters: 'Transferring over 3 MB places a heavy tax on mobile networks, data plans, and device battery life.',
+    recommendation: 'Audit third-party scripts, compress images, and enable HTTP gzip or brotli compression across all static assets.',
+    threshold: { max: 3000000, criticalMax: 5000000, unit: 'bytes' },
+    source: 'heuristic',
+    reference: 'HTTP Archive Page Weight Median',
+  },
+  {
+    id: 'perf-render-blocking',
+    category: 'performance',
+    title: 'Critical resources do not block HTML parsing',
+    description: 'Identifies synchronous CSS and JavaScript resources in <head> that stall first paint.',
+    weight: 10,
+    severityOnFail: 'medium',
+    whyItMatters: 'Render-blocking CSS and JavaScript stall First Contentful Paint while downloading and evaluating.',
+    recommendation: 'Add defer or async attributes to scripts, and inline critical above-the-fold CSS styles.',
+    threshold: { max: 0 },
+    source: 'heuristic',
+    reference: 'W3C Resource Timing Render Blocking Status',
+  },
+];
+
+export const PERFORMANCE_RULES_BY_ID = Object.fromEntries(
+  PERFORMANCE_RULES.map((rule) => [rule.id, rule])
+);

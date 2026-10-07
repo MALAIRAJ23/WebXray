@@ -1,0 +1,65 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+*.log
+
+# Cache
+.cache/
+.parcel-cache/
+.vite/
+.eslintcache
+
+# Coverage
+coverage/
+.nyc_output/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Testing artifacts
+playwright-report/
+test-results/
+
+# Local extension packages
+*.crx
+*.xpi
+
+# ZIP packages
+*.zip
+
+# Local reports / generated files
+reports/
+screenshots/generated/
+
+# Misc
+.DS_Store
